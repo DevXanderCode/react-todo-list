@@ -4,12 +4,14 @@ import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { v1 as uuid } from "uuid";
+import CompletedTask from "./components/CompletedTask";
 
 class App extends React.Component {
   state = {
     items: [],
     id: uuid(),
     item: "",
+    completedTask: [],
     time: 0,
     date: 0,
     editItem: false,
@@ -69,6 +71,53 @@ class App extends React.Component {
     });
   };
 
+  taskCompleted = (item) => {
+    const filteredItem = this.state.items.filter(
+      (prevItem) => prevItem.id !== item.id
+    );
+
+    const completedTask = this.state.items.find(
+      (prevItem) => prevItem.id === item.id
+    );
+
+    const updatedCompletedTask = [...this.state.completedTask, completedTask];
+
+    this.setState({
+      items: filteredItem,
+      completedTask: updatedCompletedTask,
+    });
+  };
+  taskUncompleted = (item) => {
+    const filteredItem = this.state.completedTask.filter(
+      (prevItem) => prevItem.id !== item.id
+    );
+
+    const uncompletedTask = this.state.completedTask.find(
+      (prevItem) => prevItem.id === item.id
+    );
+
+    const updatedItems = [...this.state.items, uncompletedTask];
+
+    this.setState({
+      items: updatedItems,
+      completedTask: filteredItem,
+    });
+  };
+
+  clearCompletedTask = () => {
+    this.setState({
+      completedTask: [],
+    });
+  };
+  deleteCompletedTask = (id) => {
+    const filteredItem = this.state.completedTask.filter(
+      (item) => item.id !== id
+    );
+    this.setState({
+      completedTask: filteredItem,
+    });
+  };
+
   render() {
     return (
       <div className="container">
@@ -86,6 +135,13 @@ class App extends React.Component {
               clearList={this.clearList}
               handleDelete={this.handleDelete}
               handleEdit={this.handleEdit}
+              taskCompleted={this.taskCompleted}
+            />
+            <CompletedTask
+              items={this.state.completedTask}
+              taskUncompleted={this.taskUncompleted}
+              clearCompletedTask={this.clearCompletedTask}
+              deleteCompletedTask={this.deleteCompletedTask}
             />
           </div>
         </div>

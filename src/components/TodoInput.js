@@ -20,6 +20,14 @@ export default class TodoInput extends Component {
               onChange={handleChange}
             />
           </div>
+          <div className="input-group-text bg-success">
+            <span className="mx-2">
+              <i className="fas fa-list-ul" />
+            </span>
+            <span className="mx-2">
+              <i className="far fa-calendar-check" />
+            </span>
+          </div>
           <button
             type="submit"
             className={
