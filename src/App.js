@@ -12,17 +12,17 @@ class App extends React.Component {
     id: uuid(),
     item: "",
     completedTask: [],
-    time: 0,
-    date: 0,
+    time: `${new Date().toLocaleTimeString()}`,
+    date: `${new Date().toLocaleDateString()}`,
     editItem: false,
     invalidInput: false,
+    moreDetails: false,
+    showTime: false,
   };
 
   handleChange = (e) => {
     this.setState({
       item: e.target.value,
-      time: new Date().toLocaleTimeString(),
-      date: new Date().toLocaleDateString(),
     });
   };
 
@@ -123,19 +123,32 @@ class App extends React.Component {
       completedTask: filteredItem,
     });
   };
-
+  showDetail = () => {
+    if (this.state.moreDetails === false) this.setState({ moreDetails: true });
+    else this.setState({ moreDetails: false });
+  };
+  handleTime = () => {
+    if (this.state.showTime === false) this.setState({ showTime: true });
+    else this.setState({ showTime: false });
+  };
   render() {
     return (
       <div className="container">
         <div className="row">
           <div className="col-10 mx-auto col-md-8 mt-4">
-            <h3 className="text-capitalize text-center">Todo Input</h3>
+            <h3 className="text-capitalize text-center">Todo List App</h3>
             <TodoInput
               item={this.state.item}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               editItem={this.state.editItem}
               invalidInput={this.state.invalidInput}
+              moreDetails={this.state.moreDetails}
+              showDetail={this.showDetail}
+              showTime={this.state.showTime}
+              handleTime={this.handleTime}
+              time={this.state.time}
+              date={this.state.date}
             />
             <TodoList
               items={this.state.items}

@@ -12,11 +12,18 @@ export default class TodoItem extends Component {
     } = this.props;
     return (
       <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
-        <input type="checkbox" onClick={taskCompleted} />
+        <input
+          type="checkbox"
+          onClick={taskCompleted}
+          style={{ minWidth: "1.2em", minHeight: "1.2em", float: "left" }}
+        />
         <h6>{title}</h6>
 
         <div className="todo-icon">
-          {time + " " + date}
+          <div style={{ fontSize: ".6rem" }} className="d-flex">
+            {time}
+          </div>
+          <div style={{ fontSize: ".6rem" }}>{date}</div>
           <span
             className="mx-2 text-success"
             onClick={handleEdit}
