@@ -5,7 +5,9 @@ const CompletedItem = (props) => {
   return (
     <li className="list-group-item d-flex justify-content-between my-2">
       <input type="checkbox" onChange={taskUncompleted} checked />
-      <h6 style={{ textDecoration: "line-through" }}>{title}</h6>
+      <h6 style={{ textDecoration: "line-through", color: "#ababab" }}>
+        {title}
+      </h6>
 
       <div className="todo-icon">
         <span

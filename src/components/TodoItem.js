@@ -27,7 +27,7 @@ export default class TodoItem extends Component {
           <span
             className="mx-2 text-danger"
             onClick={handleDelete}
-            style={{ cursor: "pointer " }}
+            style={{ cursor: "pointer" }}
           >
             <i className="fas fa-trash" />
           </span>

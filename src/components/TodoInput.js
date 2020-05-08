@@ -2,9 +2,21 @@ import React, { Component } from "react";
 
 export default class TodoInput extends Component {
   render() {
-    const { item, handleChange, handleSubmit, editItem } = this.props;
+    const {
+      item,
+      handleChange,
+      handleSubmit,
+      editItem,
+      invalidInput,
+    } = this.props;
     return (
       <div className="card card-body my-3">
+        <div
+          className={invalidInput ? "text-capitalize" : "d-none"}
+          style={{ color: "red" }}
+        >
+          please the Todo List Input can't be empty
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <div className="input-group-prepend">

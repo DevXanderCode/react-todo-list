@@ -15,6 +15,7 @@ class App extends React.Component {
     time: 0,
     date: 0,
     editItem: false,
+    invalidInput: false,
   };
 
   handleChange = (e) => {
@@ -27,6 +28,10 @@ class App extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    if (this.state.item === "") {
+      this.setState({ invalidInput: true });
+      return false;
+    }
 
     const newItem = {
       id: this.state.id,
@@ -42,6 +47,7 @@ class App extends React.Component {
       item: "",
       id: uuid(),
       editItem: false,
+      invalidInput: false,
     });
   };
 
@@ -129,6 +135,7 @@ class App extends React.Component {
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               editItem={this.state.editItem}
+              invalidInput={this.state.invalidInput}
             />
             <TodoList
               items={this.state.items}
