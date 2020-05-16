@@ -4,6 +4,7 @@ export default class TodoItem extends Component {
   render() {
     const {
       title,
+      item,
       time,
       date,
       handleDelete,
@@ -14,8 +15,8 @@ export default class TodoItem extends Component {
       <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
         <input
           type="checkbox"
-          onClick={taskCompleted}
           style={{ minWidth: "1.2em", minHeight: "1.2em", float: "left" }}
+          onClick={() => taskCompleted(item.id)}
         />
         <h6>{title}</h6>
 
@@ -33,7 +34,7 @@ export default class TodoItem extends Component {
           </span>
           <span
             className="mx-2 text-danger"
-            onClick={handleDelete}
+            onClick={() => handleDelete(item.id)}
             style={{ cursor: "pointer" }}
           >
             <i className="fas fa-trash" />
